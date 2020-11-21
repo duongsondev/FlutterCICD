@@ -1,5 +1,6 @@
 on:
   push:
+    tag:
     branches:
       - main
 name: Flutter CI-CD
