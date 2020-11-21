@@ -13,7 +13,7 @@ jobs:
         with:
           flutter-version: '1.22.4'
       - run: flutter pub get
-      - run: dart format --output=none --set-exit-if-changed
+      - run: flutter dartfmt -n lib
       - run: dart analyze
       - run: flutter test
 #      - run: flutter build apk --debug --split-per-abi
