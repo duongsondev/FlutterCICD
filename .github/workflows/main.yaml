@@ -15,7 +15,7 @@ jobs:
       - run: flutter pub get
       - run: flutter dartfmt -n lib
       - run: flutter format  lib
-      - run: dart format --output=none --set-exit-if-changed
+      - run: dart format --output=none
       - run: dart analyze
       - run: flutter test
 #      - run: flutter build apk --debug --split-per-abi
