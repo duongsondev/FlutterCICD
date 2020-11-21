@@ -1,8 +1,7 @@
+name: Run analyze and tests
 on: push
-name: Flutter CI-CD
 jobs:
-  build:
-    name: Build APK
+  analyze-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -11,16 +10,8 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.22.4'
+          channel: 'stable'
       - run: flutter pub get
-      - run: flutter dartfmt -n lib
-      - run: flutter format  lib
-      - run: dart format --output=none
-      - run: dart analyze
+      - run: flutter build aot
+      - run: flutter analyze
       - run: flutter test
-#      - run: flutter build apk --debug --split-per-abi
-#      - name: Create a Release APK
-#        uses: ncipollo/release-action@v1
-#        with:
-#          artifacts: "build/app/outputs/apk/debug/*.apk"
-#          token: ${{ secrets.TOKEN }}
