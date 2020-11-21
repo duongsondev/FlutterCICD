@@ -1,11 +1,7 @@
-on:
-  push:
-    branches:
-      - main
-name: Test, Build and Release apk
+name: Run analyze and tests
+on: pull_request
 jobs:
-  build:
-    name: Build APK
+  analyze-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -14,14 +10,8 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.22.4'
+          channel: 'stable'
       - run: flutter pub get
-      - name: Verify formatting
-        run: flutter format --output=none --set-exit-if-changed
+      - run: flutter build aot
+      - run: flutter analyze
       - run: flutter test
-      - run: flutter build apk --debug --split-per-abi
-      - name: Create a Release APK
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/debug/*.apk"
-          token: ${{ secrets.TOKEN }}
