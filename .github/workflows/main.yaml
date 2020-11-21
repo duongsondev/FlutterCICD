@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: Test, Build and Release apk
+name: Flutter CI-CD
 jobs:
   build:
     name: Build APK
